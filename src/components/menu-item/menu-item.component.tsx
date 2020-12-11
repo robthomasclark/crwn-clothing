@@ -15,14 +15,12 @@ interface MenuItemProps extends RouteComponentProps<RouterProps> {
 }
 
 const MenuItem = (props: MenuItemProps) => {
-  console.log(props.match);
   return (
     <div
       className={`${props.item.size} menu-item`}
       onClick={() => {
-        console.log(props.match);
-        props.history.push(`${props.match.url}${props.item.linkUrl}`)}
-      }
+        props.history.push(`${props.match.url}${props.item.linkUrl}`);
+      }}
     >
       <div
         className="background-image"
