@@ -6,18 +6,32 @@ import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import Header from "./components/header/header.component";
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 class App extends React.Component {
-  state = {currentUser: null}
-  
-  //this should really be a function, but, I'm being lazy in not defining 
+  state = { currentUser: null };
+
+  //this should really be a function, but, I'm being lazy in not defining
   //it since I cannot figure out exactly what the signature is from a third party library
   unsubscribeFromAuth: any = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      this.setState({ currentUser: user});
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      //this.setState({ currentUser: user });
+      console.log(userAuth);
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth, {});
+        userRef.onSnapshot((snapShot) => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data(),
+            },
+          }, () => console.log(this.state));
+        });
+      } else {
+        this.setState({ currentUser: null }, () => console.log(this.state));
+      }
     });
   }
 
@@ -28,7 +42,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header currentUser={this.state.currentUser}/>
+        <Header currentUser={this.state.currentUser} />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
