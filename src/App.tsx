@@ -14,6 +14,7 @@ class App extends React.Component {
   //this should really be a function, but, I'm being lazy in not defining
   //it since I cannot figure out exactly what the signature is from a third party library
   unsubscribeFromAuth: any = null;
+  unsubscribeFromSnapShot: any = null;
 
   componentDidMount() {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -21,7 +22,7 @@ class App extends React.Component {
       console.log(userAuth);
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth, {});
-        userRef.onSnapshot((snapShot) => {
+        this.unsubscribeFromSnapShot = userRef.onSnapshot((snapShot) => {
           this.setState({
             currentUser: {
               id: snapShot.id,
@@ -37,6 +38,8 @@ class App extends React.Component {
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
+    this.unsubscribeFromSnapShot();
+    //console.log("unmounted");
   }
 
   render() {
