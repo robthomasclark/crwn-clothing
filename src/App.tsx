@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import HomePage from "./pages/homepage/homepage.component";
@@ -11,7 +11,7 @@ import { setCurrentUser } from "./redux/user/user.actions";
 import "./App.css";
 
 
-class App extends React.Component<{setCurrentUser: any}> {
+class App extends React.Component<{setCurrentUser: any; currentUser: any}> {
   //this should really be a function, but, I'm being lazy in not defining
   //it since I cannot figure out exactly what the signature is from a third party library
   unsubscribeFromAuth: any = null;
@@ -50,15 +50,21 @@ class App extends React.Component<{setCurrentUser: any}> {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
-          <Route path="/signin" component={SignInAndSignUp} />
+          <Route exact path="/signin" render={() => this.props.currentUser ? (<Redirect to="/"/>) : (<SignInAndSignUp/>)} />
         </Switch>
       </div>
     );
   }
 }
 
+const mapStateToProps = (state: any) => {
+  return (
+    {currentUser: state.user.currentUser}
+  )
+}
+
 const mapDispatchToProps = (dispatch: any) => {
   return { setCurrentUser: (user: any) => dispatch(setCurrentUser(user)) };
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

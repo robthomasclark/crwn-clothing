@@ -1,6 +1,8 @@
+import { UserActionTypes } from "../../types/actions";
+
 export const setCurrentUser = (user: {currentUser: any}) => {
     return {
-        type: "SET_CURRENT_USER",
+        type: UserActionTypes.SET_CURRENT_USER,
         payload: user
     }
 }
