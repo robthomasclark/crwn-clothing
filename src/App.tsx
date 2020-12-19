@@ -10,8 +10,7 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 import "./App.css";
 
-
-class App extends React.Component<{setCurrentUser: any; currentUser: any}> {
+class App extends React.Component<{ setCurrentUser: any; currentUser: any }> {
   //this should really be a function, but, I'm being lazy in not defining
   //it since I cannot figure out exactly what the signature is from a third party library
   unsubscribeFromAuth: any = null;
@@ -21,18 +20,16 @@ class App extends React.Component<{setCurrentUser: any; currentUser: any}> {
     const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       //this.setState({ currentUser: user });
-      console.log(userAuth);
+      //console.log(userAuth);
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth, {});
         this.unsubscribeFromSnapShot = userRef.onSnapshot((snapShot) => {
-          console.log("second tiime")
           setCurrentUser({
             id: snapShot.id,
             ...snapShot.data(),
           });
         });
       }
-      console.log("first time");
       setCurrentUser(userAuth);
     });
   }
@@ -50,7 +47,13 @@ class App extends React.Component<{setCurrentUser: any; currentUser: any}> {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
-          <Route exact path="/signin" render={() => this.props.currentUser ? (<Redirect to="/"/>) : (<SignInAndSignUp/>)} />
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              this.props.currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
+            }
+          />
         </Switch>
       </div>
     );
@@ -58,10 +61,8 @@ class App extends React.Component<{setCurrentUser: any; currentUser: any}> {
 }
 
 const mapStateToProps = (state: any) => {
-  return (
-    {currentUser: state.user.currentUser}
-  )
-}
+  return { currentUser: state.user.currentUser };
+};
 
 const mapDispatchToProps = (dispatch: any) => {
   return { setCurrentUser: (user: any) => dispatch(setCurrentUser(user)) };

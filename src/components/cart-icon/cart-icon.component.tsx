@@ -6,9 +6,9 @@ import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
 import { toggleCartHidden } from "../../redux/cart/cart.actions";
 import "./cart-icon.styles.scss";
 
-const CartIcon = (props: {toggleCartHidden: any}) => {
+const CartIcon = (props: {hidden: any}) => {
   return (
-    <div className="cart-icon" onClick={props.toggleCartHidden}>
+    <div className="cart-icon" onClick={props.hidden}>
       <ShoppingIcon className="shopping-icon" />
       <span className="item-count">0</span>
     </div>
@@ -17,7 +17,7 @@ const CartIcon = (props: {toggleCartHidden: any}) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return (
-    {toggleCartHidden: () => dispatch(toggleCartHidden())}
+    {hidden: () => dispatch(toggleCartHidden())}
   )
 }
 

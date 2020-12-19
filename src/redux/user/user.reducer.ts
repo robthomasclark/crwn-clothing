@@ -5,7 +5,7 @@ interface State {
 }
 
 interface Action {
-  type: number;
+  type: string;
   payload: any;
 }
 
@@ -14,15 +14,15 @@ const INITIAL_STATE = {
 };
 
 const userReducer = (state: State = INITIAL_STATE, action: Action) => {
+  //console.log("calling userReducer");
   switch (action.type) {
     case UserActionTypes.SET_CURRENT_USER: {
       state = { ...state, currentUser: action.payload };
-      break;
+      return state;
     }
     default:
-      break;
+      return state;
   }
-  return state;
 };
 
 export default userReducer;
