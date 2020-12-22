@@ -1,8 +1,5 @@
 import { UserActionTypes } from "../../types/actions";
-
-interface State {
-  currentUser: null;
-}
+import { UserState } from "../../types/states";
 
 interface Action {
   type: string;
@@ -13,7 +10,7 @@ const INITIAL_STATE = {
   currentUser: null,
 };
 
-const userReducer = (state: State = INITIAL_STATE, action: Action) => {
+const userReducer = (state: UserState = INITIAL_STATE, action: Action) => {
   //console.log("calling userReducer");
   switch (action.type) {
     case UserActionTypes.SET_CURRENT_USER: {

@@ -6,6 +6,7 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import firebase, { auth } from "../../firebase/firebase.utils";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+import { MasterState } from "../../types/states";
 
 import "./header.styles.scss";
 
@@ -46,7 +47,7 @@ const Header = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: MasterState) => {
   return {
     currentUser: state.user.currentUser,
     hidden: state.cart.hidden,

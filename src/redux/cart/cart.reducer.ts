@@ -1,11 +1,8 @@
 import { CartActionTypes } from "../../types/actions";
 import { ShopItem } from "../../types/collection";
 import { addItemToCart } from "./cart.utils";
+import { CartState } from "../../types/states";
 
-interface State {
-  hidden: boolean;
-  cartItems: ShopItem[];
-}
 
 interface Action {
   type: string;
@@ -17,7 +14,7 @@ const INITIAL_STATE = {
   cartItems: [],
 };
 
-const cartReducer = (state: State = INITIAL_STATE, action: Action) => {
+const cartReducer = (state: CartState = INITIAL_STATE, action: Action) => {
   //console.log("calling cartReducer")
   switch (action.type) {
     case CartActionTypes.TOGGLE_CART_HIDDEN: {

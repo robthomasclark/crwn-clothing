@@ -8,6 +8,7 @@ import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.com
 import Header from "./components/header/header.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
+import { MasterState } from "./types/states";
 import "./App.css";
 
 class App extends React.Component<{ setCurrentUser: any; currentUser: any }> {
@@ -60,7 +61,7 @@ class App extends React.Component<{ setCurrentUser: any; currentUser: any }> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: MasterState) => {
   return { currentUser: state.user.currentUser };
 };
 
