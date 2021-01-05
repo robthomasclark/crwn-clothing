@@ -7,6 +7,8 @@ import firebase, { auth } from "../../firebase/firebase.utils";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { MasterState } from "../../types/states";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { selectCartHidden } from "../../redux/cart/cart.selectors"
 
 import "./header.styles.scss";
 
@@ -49,8 +51,8 @@ const Header = (props: Props) => {
 
 const mapStateToProps = (state: MasterState) => {
   return {
-    currentUser: state.user.currentUser,
-    hidden: state.cart.hidden,
+    currentUser: selectCurrentUser(state),
+    hidden: selectCartHidden(state),
   };
 };
 
