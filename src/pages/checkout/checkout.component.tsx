@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import CheckoutItem from "../../components/checkout-item/checkout-item.component"
+
 import { MasterState } from "../../types/states";
 import { selectCartItems, selectCartItemsTotal } from "../../redux/cart/cart.selectors";
 import { ShopItem } from "../../types/collection";
@@ -35,7 +37,7 @@ const CheckoutPage = (props: Props) => {
       {
           props.cartItems.map((cartItem: ShopItem) => {
               return (
-                  cartItem.name
+                  <CheckoutItem key={cartItem.id} item={cartItem}></CheckoutItem>
               )
           })
       }
