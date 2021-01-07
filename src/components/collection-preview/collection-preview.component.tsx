@@ -8,17 +8,20 @@ import "./collection-preview.styles.scss";
 interface Props {
   title: string;
   items: ShopItem[];
+  all?: number;
 }
 
 const CollectionPreview = (props: Props) => {
+  let length = 4;
+  if (props.all) length = props.items.length;
   return (
     <div className="collection-preview">
       <h1 className="title">{props.title.toUpperCase()}</h1>
       <div className="preview">
         {props.items
-          .filter((item, index) => index < 4)
+          .filter((item, index) => index < length)
           .map((item) => {
-            return <CollectionItem key={item.id} item={item}></CollectionItem>
+            return <CollectionItem key={item.id} item={item}></CollectionItem>;
           })}
       </div>
     </div>

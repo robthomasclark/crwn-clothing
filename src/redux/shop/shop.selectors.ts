@@ -7,3 +7,10 @@ export const selectShopData = createSelector(
   [selectShop],
   (shop) => shop.shopData
 );
+
+// in order to get this to compile in typscript, I'm forcing a valid return value
+// and will return the first collection, een though that case will never happen.
+export const selectCollection = (collectionUrlParam: string) =>
+  createSelector([selectShop], (shop) => {
+    return Object(shop.shopData)[collectionUrlParam];
+  });

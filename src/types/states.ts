@@ -14,8 +14,19 @@ export interface DirectoryState {
   sections: Item[];
 }
 
+// export interface ShopState {
+//   shopData: Collection[];
+// }
+
+
 export interface ShopState {
-  shopData: Collection[];
+  shopData: {
+    hats: Collection,
+    sneakers: Collection,
+    jackets: Collection,
+    womens: Collection,
+    mens: Collection
+  }
 }
 
 export interface MasterState {
