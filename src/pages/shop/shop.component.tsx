@@ -1,40 +1,35 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import { Collection } from "../../types/collection";
-import { SHOP_DATA } from "./shop.data";
+import { MasterState } from "../../types/states";
+import { selectShopData } from "../../redux/shop/shop.selectors";
+
 import CollectionPreview from "../../components/collection-preview/collection-preview.component";
 
-type Props = {};
-
-type State = {
-  collections: Collection[];
-};
-
-class ShopPage extends React.Component<Props> {
-  state: State;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      collections: SHOP_DATA,
-    };
-  }
-
-  render() {
-    const {collections} = this.state;
-    return <div className="shop-page">
-      {
-        collections.map((collection) => {
-          return (
-            <CollectionPreview key={collection.id} title={collection.title} items={collection.items}></CollectionPreview>
-          )
-
-        })
-      }
-
-    </div>;
-  }
+interface Props {
+  shopData: Collection[];
 }
 
-export default ShopPage;
+const ShopPage = (props: Props) => {
+  const collections = props.shopData;
+  return (
+    <div className="shop-page">
+      {collections.map((collection) => {
+        return (
+          <CollectionPreview
+            key={collection.id}
+            title={collection.title}
+            items={collection.items}
+          ></CollectionPreview>
+        );
+      })}
+    </div>
+  );
+};
+
+const mapStateToProps = (state: MasterState) => {
+  return { shopData: selectShopData(state) };
+};
+
+export default connect(mapStateToProps)(ShopPage);

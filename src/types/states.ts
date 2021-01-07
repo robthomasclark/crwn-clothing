@@ -1,4 +1,4 @@
-import { ShopItem } from "./collection";
+import { ShopItem, Collection } from "./collection";
 import { Item } from "./item";
 
 export interface UserState {
@@ -14,8 +14,13 @@ export interface DirectoryState {
   sections: Item[];
 }
 
+export interface ShopState {
+  shopData: Collection[];
+}
+
 export interface MasterState {
   user: UserState;
   cart: CartState;
   directory: DirectoryState;
+  shop: ShopState;
 }
