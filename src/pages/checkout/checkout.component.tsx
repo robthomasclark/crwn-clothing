@@ -1,17 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import CheckoutItem from "../../components/checkout-item/checkout-item.component"
+import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
 import { MasterState } from "../../types/states";
-import { selectCartItems, selectCartItemsTotal } from "../../redux/cart/cart.selectors";
+import {
+  selectCartItems,
+  selectCartItemsTotal,
+} from "../../redux/cart/cart.selectors";
 import { ShopItem } from "../../types/collection";
+import StripeCheckoutButton from "../../components/stripe-button/strip-button.component";
 
 import "./checkout.styles.scss";
 
 interface Props {
-    cartItems: ShopItem[];
-    cartTotal: number;
+  cartItems: ShopItem[];
+  cartTotal: number;
 }
 
 const CheckoutPage = (props: Props) => {
@@ -34,16 +38,19 @@ const CheckoutPage = (props: Props) => {
           <span>Remove</span>
         </div>
       </div>
-      {
-          props.cartItems.map((cartItem: ShopItem) => {
-              return (
-                  <CheckoutItem key={cartItem.id} item={cartItem}></CheckoutItem>
-              )
-          })
-      }
+      {props.cartItems.map((cartItem: ShopItem) => {
+        return <CheckoutItem key={cartItem.id} item={cartItem}></CheckoutItem>;
+      })}
       <div className="total">
-          <span>TOTAL: ${props.cartTotal}</span>
+        <span>TOTAL: ${props.cartTotal}</span>
       </div>
+      <div className="test-warning">
+        *Please use the following for credit card payment*
+        <br />
+        Number: 4242 4242 4242 4242 Exp: 01/2021 CVV: 123
+      </div>
+
+      <StripeCheckoutButton price={props.cartTotal} />
     </div>
   );
 };
@@ -51,7 +58,7 @@ const CheckoutPage = (props: Props) => {
 const mapStatetoProps = (state: MasterState) => {
   return {
     cartItems: selectCartItems(state),
-    cartTotal: selectCartItemsTotal(state)
+    cartTotal: selectCartItemsTotal(state),
   };
 };
 
