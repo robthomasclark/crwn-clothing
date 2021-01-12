@@ -1,7 +1,7 @@
 import { ShopState } from "../../types/states";
 
 const SHOP_DATA: ShopState = {
-    shopData: {
+   
         hats: {
             id: 1,
             title: "Hats",
@@ -282,7 +282,7 @@ const SHOP_DATA: ShopState = {
                 },
             ],
         },
-    }
+    
 }
 
 interface Action {

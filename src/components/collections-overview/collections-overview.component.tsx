@@ -7,7 +7,11 @@ import CollectionPreview from "../collection-preview/collection-preview.componen
 
 import "./collections-overview.styles.scss";
 
-const CollectionsOverview = (props: ShopState) => {
+interface Props {
+  shopData: ShopState;
+}
+
+const CollectionsOverview = (props: Props) => {
   const collections = props.shopData;
   return (
     <div className="collections-overview">
