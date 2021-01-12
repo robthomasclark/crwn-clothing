@@ -12,20 +12,24 @@ interface Props {
 }
 
 const CollectionsOverview = (props: Props) => {
-  const collections = props.shopData;
-  return (
-    <div className="collections-overview">
-      {Object.entries(collections).map((collection) => {
-        return (
-          <CollectionPreview
-            key={collection[0]}
-            title={collection[1].title}
-            items={collection[1].items}
-          ></CollectionPreview>
-        );
-      })}
-    </div>
-  );
+  const collections = props.shopData.collections;
+  if (collections) {
+    return (
+      <div className="collections-overview">
+        {Object.entries(collections).map((collection) => {
+          return (
+            <CollectionPreview
+              key={collection[0]}
+              title={collection[1].title}
+              items={collection[1].items}
+            ></CollectionPreview>
+          );
+        })}
+      </div>
+    );
+  } else {
+    return (<div></div>)
+  }
 };
 
 const mapStateToProps = (state: MasterState) => {

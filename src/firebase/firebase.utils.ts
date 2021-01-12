@@ -72,17 +72,14 @@ export const convertCollectionSnapshotToMap = (
       items,
     };
   });
-  console.log("Transformed:", transformedCollection);
   //const object = Object.assign({}, ...transformedCollection);
   //console.log("Transformed Object", object);
 
   var accumulator: Record<string, any> = {};
-
   transformedCollection.forEach((element) => {
     accumulator[element.title.toLowerCase()] = element;
   });
-
-  console.log("Transformed to Object:", accumulator);
+  return accumulator;
 };
 
 firebase.initializeApp(firebaseConfig);

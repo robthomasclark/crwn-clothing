@@ -9,4 +9,8 @@ export enum CartActionTypes {
   CLEAR_ITEM_FROM_CART = "CLEAR_ITEM_FROM_CART"
 }
 
+export enum ShopActionTypes {
+  UPDATE_COLLECTIONS = "UPDATE_COLLECTIONS"
+}
+
 

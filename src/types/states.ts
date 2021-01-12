@@ -19,11 +19,13 @@ export interface DirectoryState {
 // }
 
 export interface ShopState {
-  hats: Collection;
-  sneakers: Collection;
-  jackets: Collection;
-  womens: Collection;
-  mens: Collection;
+  collections: {
+    hats: Collection;
+    sneakers: Collection;
+    jackets: Collection;
+    womens: Collection;
+    mens: Collection;
+  };
 }
 
 export interface MasterState {

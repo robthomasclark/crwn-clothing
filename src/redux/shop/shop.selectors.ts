@@ -12,5 +12,5 @@ export const selectShopData = createSelector(
 // and will return the first collection, een though that case will never happen.
 export const selectCollection = (collectionUrlParam: string) =>
   createSelector([selectShop], (shop) => {
-    return Object(shop)[collectionUrlParam];
+    return Object(shop.collections)[collectionUrlParam];
   });

@@ -20,16 +20,21 @@ interface Props {
 
 const CollectionPage = (props: Props) => {
   const { collection } = props;
-  return (
-    <div className="collection-page">
-      <CollectionPreview
-        key={collection.id}
-        title={collection.title}
-        items={collection.items}
-        all={collection.items.length}
-      />
-    </div>
-  );
+  console.log("collection", collection)
+  if (collection) {
+    return (
+      <div className="collection-page">
+        <CollectionPreview
+          key={collection.id}
+          title={collection.title}
+          items={collection.items}
+          all={collection.items.length}
+        />
+      </div>
+    );
+  } else {
+    return (<div></div>)
+  }
 };
 
 const mapStateToProps = (state: MasterState, ownProps: Props) => {
