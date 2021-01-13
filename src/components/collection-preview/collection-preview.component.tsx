@@ -14,8 +14,6 @@ interface Props {
 const CollectionPreview = (props: Props) => {
   let length = 4;
   if (props.all) length = props.items.length;
-  console.log("length:", length)
-  console.log("props:", props)
   return (
     <div className="collection-preview">
       <h1 className="title">{props.title.toUpperCase()}</h1>

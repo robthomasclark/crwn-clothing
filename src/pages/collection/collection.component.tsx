@@ -20,7 +20,6 @@ interface Props {
 
 const CollectionPage = (props: Props) => {
   const { collection } = props;
-  console.log("collection", collection)
   if (collection) {
     return (
       <div className="collection-page">
